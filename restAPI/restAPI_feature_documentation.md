@@ -1,4 +1,4 @@
-# 99-OTPs
+# 99-OTPs — REST API
 
 A lightweight FastAPI service for sending and verifying one-time passwords (OTPs) via SMS. OTPs are 6 digits, expire after 2 minutes, and are single-use. Redis is used for state persistence.
 
@@ -9,19 +9,37 @@ A lightweight FastAPI service for sending and verifying one-time passwords (OTPs
 - **FastAPI** — API framework
 - **Redis** — OTP storage with native TTL
 - **httpx** — Async HTTP client for SMS delivery
-- **myCSMS** — SMS provider
 - **uvicorn** — ASGI server
 - **python-dotenv** — Environment variable management
+
+---
+
+## SMS provider
+
+Bring your own. The `sms.py` module is the only file you need to touch — swap in your provider's API URL, key, and payload structure. Any provider that accepts an HTTP request works: Twilio, Africa's Talking, myCSMS, Termii, or anything else.
+
+```python
+# sms.py — update these to match your provider
+SMS_API_URL = os.getenv("SMS_API_URL")
+SMS_API_KEY = os.getenv("SMS_API_KEY")
+SMS_SENDER_ID = os.getenv("SMS_SENDER_ID")
+
+payload = {
+    "phone": [phone_number],   # adjust field names to match your provider
+    "sender_id": SMS_SENDER_ID,
+    "message": f"Your OTP is {otp}. It expires in 2 minutes. Do not share it with anyone."
+}
+```
 
 ---
 
 ## Project structure
 
 ```
-99-OTPs/
+restAPI/
 ├── main.py               # FastAPI app and route handlers
 ├── otp_store.py          # Redis OTP storage, TTL, and verification
-├── sms.py                # SMS delivery via myCSMS API
+├── sms.py                # SMS delivery — swap provider here
 ├── schemas.py            # Pydantic request body models
 ├── .env                  # Environment variables (not committed)
 ├── requirements.txt      # Pinned dependencies
@@ -54,7 +72,7 @@ redis-cli ping  # should return PONG
 **1. Clone the repo**
 ```bash
 git clone https://github.com/your-username/99-OTPs.git
-cd 99-OTPs
+cd 99-OTPs/restAPI
 ```
 
 **2. Create and activate a virtual environment**
@@ -75,10 +93,10 @@ pip install -r requirements.txt
 
 **4. Configure environment variables**
 
-Create a `.env` file in the project root:
+Create a `.env` file in the `restAPI/` directory:
 ```env
-SMS_API_URL=https://app.mycsms.com/api/v3/sms/send
-SMS_API_KEY=your_mycsms_api_key
+SMS_API_URL=https://your-sms-provider.com/api/send
+SMS_API_KEY=your_api_key
 SMS_SENDER_ID=YourSenderID
 REDIS_URL=redis://localhost:6379
 ```
@@ -144,7 +162,7 @@ Validates the OTP for the given phone number. On success the OTP is consumed and
 1. Client calls `/otp/send` with a phone number
 2. Server generates a cryptographically secure 6-digit OTP using Python's `secrets` module
 3. OTP is stored in Redis under the key `otp:{phone_number}` with a 120-second TTL
-4. OTP is delivered to the phone number via the myCSMS API
+4. OTP is delivered to the phone number via your configured SMS provider
 5. Client calls `/otp/verify` with the phone number and received OTP
 6. Server fetches the stored OTP from Redis and compares
 7. On match, the key is deleted (one-time use) and `{ "success": true }` is returned
@@ -156,8 +174,8 @@ Validates the OTP for the given phone number. On success the OTP is consumed and
 
 | Variable | Description |
 |----------|-------------|
-| `SMS_API_URL` | myCSMS API endpoint |
-| `SMS_API_KEY` | myCSMS Bearer token |
+| `SMS_API_URL` | Your SMS provider's API endpoint |
+| `SMS_API_KEY` | Your SMS provider's Bearer token |
 | `SMS_SENDER_ID` | Registered sender name or number |
 | `REDIS_URL` | Redis connection URL |
 
