@@ -1,4 +1,4 @@
-# 99-OTPs 🔐
+# 99-OTPs
 
 > "Because apparently, passwords alone weren't stressful enough."
 
@@ -8,14 +8,14 @@ A custom OTP generator for your apps. Because you deserve to make your users ope
 
 ## What's in the box
 
-### REST API ⚡
+### REST API
 For those of you who like your requests HTTP and your responses JSON. Clean, async, and it actually works — which is more than we can say for most side projects.
 
 Full documentation included. You're welcome.
 
 > "Feel free." — Isaac, probably wearing sunglasses when he said this.
 
-### gRPC 🚧
+### gRPC
 For the enlightened ones. The ones who looked at REST and said *"this isn't fast enough for my trust issues."*
 
 Stay tuned. Good things come to those who wait — unlike OTPs, which expire in 2 minutes and take your patience with them.
