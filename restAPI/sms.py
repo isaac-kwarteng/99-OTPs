@@ -17,9 +17,13 @@ async def send_sms(phone_number: str, otp: str) -> bool:
     if not is_valid_phone(phone_number):
         raise ValueError(f"Invalid phone number: {phone_number}")
     
+  
+    SMS_SENDER_ID = os.getenv("SMS_SENDER_ID")
+    
     payload = {
-        "phone_number": phone_number,
-        "message": f"Your OTP is {otp}. It expires in 5 minutes. Do not share it with anyone."
+        "phone": [phone_number],
+        "sender_id": SMS_SENDER_ID,
+        "message": f"Your OTP is {otp}. It expires in 2 minutes. Do not share it with anyone."
     }
     
     headers = {
