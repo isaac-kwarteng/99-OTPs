@@ -11,6 +11,8 @@ A custom OTP generator for your apps. Because you deserve to make your users ope
 ### REST API — Python
 For those of you who like your requests HTTP and your responses JSON. Clean, async, and it actually works — which is more than we can say for most side projects.
 
+Plug in whatever SMS provider you use. Twilio, myCSMS, Africa's Talking, carrier pigeon with an API — if it sends SMS, it works here.
+
 Full documentation included. You're welcome.
 
 > "Feel free." — Isaac, probably wearing sunglasses when he said this.
@@ -19,6 +21,8 @@ Full documentation included. You're welcome.
 For the enlightened ones. The ones who looked at REST and said *"this isn't fast enough for my trust issues."*
 
 Written in Go, because if you're going fast, you might as well go **really** fast. Goroutines don't sleep. Neither does this service.
+
+Same deal — bring your own SMS provider.
 
 Stay tuned. Good things come to those who wait — unlike OTPs, which expire in 2 minutes and take your patience with them.
 
