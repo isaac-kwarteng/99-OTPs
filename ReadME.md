@@ -8,15 +8,17 @@ A custom OTP generator for your apps. Because you deserve to make your users ope
 
 ## What's in the box
 
-### REST API
+### REST API — Python
 For those of you who like your requests HTTP and your responses JSON. Clean, async, and it actually works — which is more than we can say for most side projects.
 
 Full documentation included. You're welcome.
 
 > "Feel free." — Isaac, probably wearing sunglasses when he said this.
 
-### gRPC
+### gRPC — Go
 For the enlightened ones. The ones who looked at REST and said *"this isn't fast enough for my trust issues."*
+
+Written in Go, because if you're going fast, you might as well go **really** fast. Goroutines don't sleep. Neither does this service.
 
 Stay tuned. Good things come to those who wait — unlike OTPs, which expire in 2 minutes and take your patience with them.
 
@@ -58,5 +60,5 @@ Broke something? Pretend it was always like that and open a PR anyway.
 
 ---
 
-*Built with FastAPI, Redis, httpx, and an unreasonable amount of determination.*  
-*gRPC implementation powered by spite and caffeine. Coming soon.*
+*REST API built with FastAPI, Redis, httpx, and an unreasonable amount of determination.*  
+*gRPC implementation written in Go — because some of us have standards. Coming soon.*
