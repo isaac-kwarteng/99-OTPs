@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-OTP_TTL_SECONDS = 120  # 2 minutes
+OTP_TTL_SECONDS = 300  # 5 minutes
 
 r = redis.from_url(os.getenv("REDIS_URL"), decode_responses=True)
 
