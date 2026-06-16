@@ -71,7 +71,7 @@ redis-cli ping  # should return PONG
 
 **1. Clone the repo**
 ```bash
-git clone https://github.com/your-username/99-OTPs.git
+git clone https://github.com/isaac-kwarteng/99-OTPs.git
 cd 99-OTPs/restAPI
 ```
 

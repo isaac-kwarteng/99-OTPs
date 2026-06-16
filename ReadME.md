@@ -43,6 +43,17 @@ Full documentation will be included. Probably.
 
 ---
 
+## Features
+
+### Rate Limiting
+The REST API includes built-in rate limiting to protect against abuse:
+- **OTP Send** (`/otp/send`): 5 requests per minute per IP address
+- **OTP Verify** (`/otp/verify`): 10 requests per minute per IP address
+
+Exceeding limits returns HTTP 429 (Too Many Requests). Perfect for stopping brute force attacks and SMS flooding without breaking the bank on SMS costs.
+
+---
+
 ## Why OTPs?
 
 Because "password123" wasn't cutting it anymore and your users refuse to use a password manager. We don't judge. We just send the code.
